@@ -18,7 +18,7 @@ How would you explain to a budding developer what the drawbacks of using factory
 ## Response 1
 
 
----
+Factory functions are useful for making similar objects, but they have some downsides. Every time you call one, it makes a new copy of the methods, which takes up more memory. They also don’t use prototypes, so the objects can’t share the same methods. Using classes is better because they use prototypes to share behavior, making the code more efficient and easier to organize when working on larger projects.
 
 ## Prompt 2
 
@@ -27,7 +27,7 @@ Explain what factors you should consider when deciding to make a property/method
 ## Response 2
 
 
----
+You should make a property or method private when you don’t want it to be changed or used from outside the class. This helps protect the object’s data and keeps it working the way it’s supposed to. For example, in a BankAccount class, the #balance should be private so only methods like deposit() or withdraw() can update it. That way, the balance stays accurate and secure.
 
 ## Prompt 3
 
@@ -35,7 +35,7 @@ Explain what factors you should consider when deciding to make a property/method
 
 ## Response 3
 
----
+You should make a property or method static when it belongs to the class itself and not to a specific object. Static methods are good for tasks that don’t depend on instance data. For example, a User class could have a static compareAges(user1, user2) method that compares two users’ ages without needing to create a new User object first.
 
 ## Prompt 4
 
@@ -56,3 +56,11 @@ class Vault {
 Identify what the mistake is, explain why it is a problem, and suggest a way to fix it.
 
 ## Response 4
+
+The code doesn’t have a syntax error, but it has a logical issue. The listSecrets() method returns the actual #secrets array, which lets external code modify it and breaks encapsulation. To fix this, the method should return a copy of the array instead, like this:
+
+```js
+listSecrets() {
+  return [...this.#secrets];
+}
+
